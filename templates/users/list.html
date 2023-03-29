@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}List of users{% endblock %}
+
+{% block body %}
+
+<div class="card">
+    <div class="card-body">
+
+        <h5 class="card-title">Users</h5>
+        <div class="row card-body">
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive">
+                
+                  <table id="user_table" class="table table-sm">
+                      <thead >
+                        <th scope="col">&nbsp;#</th>
+                        <th >Name</th>
+                        <th >Type</th>
+                        <th >Details</th>
+                      </thead>
+                      <tbody class="table-group-divider">
+                        {% for user in users %}
+                        <tr>
+                          <td>
+                            <img loading="lazy" class="rounded-circle" alt="avatar1" width="30" height="30" src="https://qph.cf2.quoracdn.net/main-qimg-6d72b77c81c9841bd98fc806d702e859-lq" />
+                          </td>
+                          <td>{{ user.full_name }}</td>
+                          <td>{%if user.is_admin %} <span class="badge rounded-pill bg-success">Admin</span> {% else %} <span class="badge rounded-pill bg-info">Not admin</span> {% endif %}</td>
+                          <td><a href="/users/{{user.username}}" title="details" class="btn btn-sm btn-outline-success"><i class="fas fa-search"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+              </div>
+          </div>
+          </div>
+
+          </div>
+    </div>
+  </div>
+
+{% endblock %}

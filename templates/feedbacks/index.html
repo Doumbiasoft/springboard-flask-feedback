@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Feedback{% endblock %}
+{%block scrum%}
+
+{%endblock%}
+
+{% block body %}
+<div class="container rounded bg-white mt-1 mb-5">
+  <div class="row p-3" >
+    <form action="/feedback" method="POST" class="row g-3">
+      {{ form.hidden_tag()}}
+      <h4>Add feedback</h4>
+      <div class="timeline-header my-2">
+        <span class="userimage">
+         <img class=" rounded-circle"  width="40" height="40" src="https://qph.cf2.quoracdn.net/main-qimg-6d72b77c81c9841bd98fc806d702e859-lq" alt="">
+       </span>
+        <span class="username">@{{session.get('username')}}</span>
+        <span class="pull-right text-muted"></span>
+     </div>
+     {{ render_field_without_label(form.title, placeholder = form.title.label.text) }}
+     {{ render_field(form.content, placeholder = form.content.label.text) }}
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Send&nbsp;<i class="fa fas fa-arrow-circle-right"></i></button>
+      </div>
+    </form>                                                                                                                                                                            
+  </div>
+</div>
+<h4 class="text-right">Feedback</h4>
+{%if feedbacks %}
+{%for feedback in feedbacks%}
+<div class="container rounded bg-white mt-2 mb-5">
+  <div class="row">
+      <div class="col-12 border-right">
+          <div class="p-3 py-3">
+               <!-- begin profile-content -->
+           <div class="profile-content">
+            <!-- begin tab-content -->
+             <!-- begin timeline-body -->
+
+           <div class="timeline-body">
+            <div class="timeline-header my-2">
+               <span class="userimage">
+                <img class=" rounded-circle"  width="40" height="40" src="https://qph.cf2.quoracdn.net/main-qimg-6d72b77c81c9841bd98fc806d702e859-lq" alt="">
+              </span>
+               <span class="username">{{feedback.user.full_name}}</span>
+               <span class="pull-right text-muted">@{{feedback.user.username}}</span>
+            </div>
+     
+            <div class="timeline-content">
+              <p><small class="pull-right text-muted">{{feedback.friendly_date}}</small></p>
+               <h5 class="template-title">
+                  <i class="fas fa-comment-dots text-danger fa-fw"></i>
+                  {{feedback.title}}
+               </h5>
+               <p>
+                {{feedback.content}}
+              </p>
+               
+            </div>
+            <div class="timeline-footer">
+              {% if feedback.username == session.get('username') or session.get('is_admin') %}
+               <a href="/feedback/{{feedback.id}}/update?back=feed" class="m-r-15 text-inverse-lighter" title="Edit"><i class="fa fa-pen-square fa-fw fa-lg m-r-3" style="font-size: x-large;"></i></a>
+               <form action="/feedback/{{feedback.id}}/delete?back=feed" method="POST" style="display: inline;">
+                 <button title="Delete" class="btn btn-link m-0 p-0"><i class="fa fa-trash-alt fa-fw fa-lg m-r-3 text-danger" style="font-size: x-large;"></i></button>
+              </form>
+              <!-- <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>-->
+              {% endif %}
+            </div>
+         </div>
+           <!-- end timeline-body -->
+             
+          </div>
+      </div>
+                                                                                                                                                                                       
+  </div>
+</div>
+</div>
+{% endfor %}
+{% else %}
+<div class="container rounded bg-white mt-2 mb-5">
+  <div class="row">
+      <div class="col-12 border-right">
+        <div class="p-3 py-3">
+
+          <h3>No feedback!</h3>
+        </div>
+      </div>
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock %}

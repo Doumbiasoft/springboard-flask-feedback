@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{%block scrum%}
+
+{%endblock%}
+
+{% block body %}
+
+  <div class="container">
+        <div class="mb-3">
+          <div class="row d-flex justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-5">
+                  <h3 class="mb-4 display-5">Sign up</h3>
+                  <form action="/register" method="POST">
+
+                     {% include "utilities/_form_base.html" %}
+            
+                        <button type="submit" class="btn btn-primary w-100 my-3">Sign up</button>
+                        <div class="text-center">
+                        <p>You already have an account? <a href="/login">Log in</a></p>
+
+                        </div>
+                            <hr class="my-4">
+                            <div class="text-center">
+                                <p>Or Sign up with:</p>
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-google"></i>
+                                </button>
+                
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-github"></i>
+                                </button>
+                        </div>
+                 </form>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+  
+{% endblock %}

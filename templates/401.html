@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Access denied{% endblock %}
+{%block scrum%}
+
+{%endblock%}
+
+{% block body %}
+
+<div class="">
+    <div class="card-body">
+        <div class="row">
+          <div class="d-flex align-items-center justify-content-center">
+            <div class="text-center">
+                <h1 class="display-1 fw-bold">401</h1>
+                <p class="fs-3"> <span class="text-danger">Opps!</span> Authorization denied</p>
+                <p class="lead">
+                    You are not authorize to access this resource.
+                  </p>
+                <a href="/" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-circle-left"></i>&nbsp;Go home</a>
+            </div>
+        </div>
+        </div>
+    </div>
+  </div>
+
+{% endblock %}

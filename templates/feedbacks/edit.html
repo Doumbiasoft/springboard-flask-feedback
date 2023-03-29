@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Edit feedback{% endblock %}
+{%block scrum%}
+
+{%endblock%}
+
+{% block body %}
+<div class="container rounded bg-white mt-1 mb-5">
+  <div class="row p-3" >
+    <form action="/feedback/{{feedbacks_id}}/update?back={{return_page_code}}" method="POST" class="row g-3">
+      {{ form.hidden_tag()}}
+      <h4>Edit feedback</h4>
+      <div class="timeline-header my-2">
+        <span class="userimage">
+         <img class=" rounded-circle"  width="40" height="40" src="https://qph.cf2.quoracdn.net/main-qimg-6d72b77c81c9841bd98fc806d702e859-lq" alt="">
+       </span>
+        <span class="username">@{{session.get('username')}}</span>
+        <span class="pull-right text-muted"></span>
+     </div>
+     <p class="pull-right text-muted"><i class="fas fa-comment-dots text-danger fa-fw"></i>&nbsp;Published - {{ date_published }}</p>
+     {{ render_field_without_label(form.title, placeholder = form.title.label.text) }}
+     {{ render_field(form.content, placeholder = form.content.label.text) }}
+      <br>
+      <div class="col-12">
+        <a {% if return_page_code == 'profile' %} href="/users/{{session.get('username')}}" {% elif return_page_code == 'feed' %} href="/" {% endif %} class="btn btn-primary">Cancel&nbsp;<i class="fas far fa-window-close"></i></a>&nbsp;
+        <button type="submit" class="btn btn-primary">Save&nbsp;<i class="fa fas far fa-check-square"></i></button>
+      </div>
+    </form>                                                                                                                                                                            
+  </div>
+</div>
+
+
+
+
+{% endblock %}
