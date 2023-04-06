@@ -6,9 +6,12 @@ from secrets_key import flask_secret_key
 from session_variables import session_username,session_fullname,session_is_admin
 from flask_debugtoolbar import DebugToolbarExtension
 
+if database.startswith("postgres://"):
+    database = database.replace("postgres://", "postgresql://", 1)
 
 app = Flask(__name__)
 app.config[SECRET_KEY] = flask_secret_key
+
 app.config[SQLALCHEMY_DATABASE_URI] = database
 app.config[SQLALCHEMY_TRACK_MODIFICATIONS] = False
 app.config[SQLALCHEMY_ECHO] = True
@@ -16,6 +19,7 @@ app.config[DEBUG_TB_INTERCEPT_REDIRECT] = False
 app.config[TESTING] = True
 app.config[DEBUG_TB_HOSTS] = dont_show_debug_toolbar
 connect_db(app)
+
 toolbar = DebugToolbarExtension(app)
   
 
@@ -292,5 +296,4 @@ def delete_feedback(feedback_id):
               return redirect(url_for('feedback_all'))
            elif return_page_code == 'profile':
               return redirect(url_for('show_user',username = session.get('username')))
-
 
