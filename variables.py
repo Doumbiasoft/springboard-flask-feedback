@@ -1,3 +1,4 @@
+import os 
 """Flask default params"""
 
 SECRET_KEY = 'SECRET_KEY'
@@ -8,7 +9,7 @@ SECRET_KEY = 'SECRET_KEY'
 SQLALCHEMY_DATABASE_URI = 'SQLALCHEMY_DATABASE_URI'
 SQLALCHEMY_TRACK_MODIFICATIONS = 'SQLALCHEMY_TRACK_MODIFICATIONS'
 SQLALCHEMY_ECHO = 'SQLALCHEMY_ECHO'
-database = 'postgresql:///feedback_db'
+database = os.environ.get('DATABASE_URL','postgresql:///feedback_db')
 
 ##################################################
 
